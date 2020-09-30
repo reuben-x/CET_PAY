@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           onTap: () {},
                           child: Center(
                             child: Text(
-                              'LOGIN',
+                              'Login with College Mail ID',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
