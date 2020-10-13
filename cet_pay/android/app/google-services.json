@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "591400270110",
+    "firebase_url": "https://cet-pay-ad3e3.firebaseio.com",
+    "project_id": "cet-pay-ad3e3",
+    "storage_bucket": "cet-pay-ad3e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591400270110:android:f8f08fd380b2b86a69310f",
+        "android_client_info": {
+          "package_name": "com.example.cet_pay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591400270110-vbh1m9ahk6d5kbgsod7ih3ikif8b0164.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnqBK5fFfTK3uAHkEqKo4SJQw3Bl4npkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591400270110-vbh1m9ahk6d5kbgsod7ih3ikif8b0164.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
