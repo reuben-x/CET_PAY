@@ -1,18 +1,20 @@
+import 'package:cet_pay/screens/landing.dart';
 import 'package:flutter/material.dart';
-import 'screens/login.dart';
-import 'screens/home.dart';
+import 'screens/signin.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(new MyApp());
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: <String, WidgetBuilder>{
-        '/signup': (BuildContext context) => new SignUpPage()
-      },
-      home: new MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
