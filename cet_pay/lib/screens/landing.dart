@@ -1,11 +1,15 @@
 import 'package:cet_pay/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cet_pay/screens/signin.dart';
 class Landing extends StatefulWidget {
   @override
   _LandingState createState() => _LandingState();
 }
 
 class _LandingState extends State<Landing> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +22,13 @@ class _LandingState extends State<Landing> {
             icon: Icon(Icons.person),
             onPressed: () async {
               authService.signOut();
+              Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+              builder: (context) {
+              return SignIn();
+                },
+              ),
+            );
             },
             label: Text('Log Out'),
           )

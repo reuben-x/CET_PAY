@@ -2,16 +2,20 @@ import 'package:cet_pay/screens/landing.dart';
 import 'package:cet_pay/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cet_pay/shared/loading.dart';
 
-class MyHomePage extends StatefulWidget {
+bool isLoading = true;
+
+class SignIn extends StatefulWidget {
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _SignInState createState() => new _SignInState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SignInState extends State<SignIn> {
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("CetPay"),
         centerTitle: true,
@@ -26,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onTap: () {
                authService.googleSignIn().then((result) {
                 if (result != null) {
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) {
                         return Landing();
