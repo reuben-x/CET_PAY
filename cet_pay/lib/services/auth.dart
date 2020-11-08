@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:cet_pay/screens/signin.dart';
 
+String profileName;
+String profilepicURL;
 class AuthService {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -33,6 +35,8 @@ class AuthService {
      assert(user.uid == currentUser.uid);
 
      print('signInWithGoogle succeeded: $user');
+     profileName = user.displayName;
+     profilepicURL = user.photoURL;
      return '$user';
 
    }
@@ -40,7 +44,7 @@ class AuthService {
    return null;
   }
 
-  void updateUserData (User user) async {
+  Future updateUserData (User user) async {
    DocumentReference ref = _db.collection('users').doc(user.uid);
 
    return ref.set({

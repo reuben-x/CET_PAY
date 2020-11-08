@@ -9,13 +9,12 @@ class Landing extends StatefulWidget {
 class _LandingState extends State<Landing> {
 
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Overview'),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.black54,
         elevation: 0,
         actions: <Widget>[
           FlatButton.icon(
@@ -41,16 +40,19 @@ class _LandingState extends State<Landing> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 40, 30, 40),
-                  child: Text("Welcome Kevin",
+                  child: Text("Welcome $profileName",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 30,
+                      fontSize: 20,
                     ),),
                 ),
                 SizedBox(width: 40,),
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage: NetworkImage('https://picsum.photos/200'),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: CircleAvatar(
+                    radius: 40,
+                    backgroundImage: NetworkImage(profilepicURL),
+                  ),
                 ),
               ],
             ),
@@ -70,7 +72,27 @@ class _LandingState extends State<Landing> {
 
 
             Divider(),
+
           ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title : Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title : Text('Business'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+             title : Text('School'),
+          ),
+        ],
+       // currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+       // onTap: _onItemTapped,
       ),
     );
   }

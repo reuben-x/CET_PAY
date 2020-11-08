@@ -53,7 +53,14 @@ class _SignInState extends State<SignIn> {
                 )),
               )
             ),
-          )
+          ),
+          SizedBox(height: 10),
+          Container(
+            child: Text("Sign in using your CET Mail ID.",
+            style : TextStyle(
+              fontSize: 15,
+            ) )
+          ),
         ],
       ),
 
