@@ -1,14 +1,21 @@
 import 'package:cet_pay/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cet_pay/screens/signin.dart';
+import 'package:cet_pay/shared/nav_widgets.dart';
 class Landing extends StatefulWidget {
   @override
   _LandingState createState() => _LandingState();
+
+
 }
 
 class _LandingState extends State<Landing> {
 
+  int _currentIndex = 0;
+  PageController _pageController = PageController();
+  final tabs =  [
 
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,65 +40,52 @@ class _LandingState extends State<Landing> {
           )
         ],
       ),
-      body: Column(
-          children: [
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 40, 30, 40),
-                  child: Text("Welcome $profileName",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),),
-                ),
-                SizedBox(width: 40,),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundImage: NetworkImage(profilepicURL),
-                  ),
-                ),
-              ],
-            ),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  const ListTile(
-                    title: Text("Payment Status",style: TextStyle(
-                      fontSize: 22,
-                    ),),
-                    subtitle: Text("Hostel Fees Paid"),
-                  ),
-                ],
-              ),
-            ),
-
-
-            Divider(),
-
-          ],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (page){
+          setState(() {
+            _currentIndex = page;
+          });
+        },
+        children: <Widget>[
+          LandingHome(),
+          LandingServices(),
+          LandingPayments(),
+          LandingSettings(),
+        ],
       ),
+
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title : Text('Home'),
+            icon: Icon(Icons.home,color: Colors.black ,),
+            title : Text('Home',style: TextStyle(color: Colors.black),),
+
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title : Text('Business'),
+            icon: Icon(Icons.payment,color: Colors.black),
+            title : Text('Services',style: TextStyle(color: Colors.black),),
+
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-             title : Text('School'),
+            icon: Icon(Icons.euro_symbol,color: Colors.black),
+             title : Text('Payments',style: TextStyle(color: Colors.black),),
+
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings,color: Colors.black),
+            title : Text('Settings',style: TextStyle(color: Colors.black),),
           ),
         ],
+       onTap: (index) {
+          setState(() {
+              _currentIndex= index;
+              _pageController.animateToPage(index, duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+              
+          });
+       },
        // currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
        // onTap: _onItemTapped,
       ),
     );
