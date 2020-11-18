@@ -20,7 +20,7 @@ class _LandingState extends State<Landing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Overview'),
+        title: Text('CET Pay'),
         backgroundColor: Colors.black54,
         elevation: 0,
         actions: <Widget>[
@@ -49,7 +49,6 @@ class _LandingState extends State<Landing> {
         },
         children: <Widget>[
           LandingHome(),
-          LandingServices(),
           LandingPayments(),
           LandingSettings(),
         ],
@@ -61,11 +60,6 @@ class _LandingState extends State<Landing> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home,color: Colors.black ,),
             title : Text('Home',style: TextStyle(color: Colors.black),),
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.payment,color: Colors.black),
-            title : Text('Services',style: TextStyle(color: Colors.black),),
 
           ),
           BottomNavigationBarItem(

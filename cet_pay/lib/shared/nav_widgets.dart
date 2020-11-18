@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 //import 'package:cet_pay/services/auth.dart';
 
@@ -19,13 +21,17 @@ class _LandingHomeState extends State<LandingHome> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 40, 30, 40),
               // child: Text("$profileName",
-              child: Text("profileName",
+              child: Text(
+                "profileName",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                ),),
+                ),
+              ),
             ),
-            SizedBox(width: 40,),
+            SizedBox(
+              width: 40,
+            ),
             Align(
               alignment: Alignment.centerRight,
               child: CircleAvatar(
@@ -40,43 +46,22 @@ class _LandingHomeState extends State<LandingHome> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               const ListTile(
-                title: Text("Payment Status",style: TextStyle(
-                  fontSize: 22,
-                ),),
+                title: Text(
+                  "Payment Status",
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
                 subtitle: Text("Hostel Fees Paid"),
               ),
             ],
           ),
         ),
-
-
         Divider(),
-
       ],
     );
   }
 }
-//////////////////////////////////////////////////////
-
-//Landing Page - Services Section
-
-class LandingServices extends StatefulWidget {
-  @override
-  _LandingServicesState createState() => _LandingServicesState();
-}
-
-class _LandingServicesState extends State<LandingServices> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(child: Text('Services Page',style: TextStyle(fontSize: 28),)),
-      ),
-    );
-  }
-}
-
 //////////////////////////////////////////////////////
 
 //Landing Page - Payment Section
@@ -87,12 +72,54 @@ class LandingPayments extends StatefulWidget {
 }
 
 class _LandingPaymentsState extends State<LandingPayments> {
+  void _previousTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: Text(
+            "Previous transactions will show up here !!",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              height: 20,
+            ),
+          ),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(child: Text('Payments Page',style: TextStyle(fontSize: 28),)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Center(
+                    child: Text(
+                  'Payments Page',
+                  style: TextStyle(fontSize: 28),
+                )),
+              ),
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
+                  child: IconButton(
+                    icon: Icon(Icons.history),
+                    color: Colors.amber,
+                    iconSize: 40,
+                    onPressed: () => _previousTransaction(context),
+                  ))
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -111,11 +138,24 @@ class _LandingSettingsState extends State<LandingSettings> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(child: Text('Settings Page',style: TextStyle(fontSize: 28),)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Center(
+                    child: Text(
+                  'Settings Page',
+                  style: TextStyle(fontSize: 28),
+                )),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 }
-
