@@ -27,14 +27,14 @@ class _LandingState extends State<Landing> {
           FlatButton.icon(
             icon: Icon(Icons.person),
             onPressed: () async {
-              authService.signOut();
-              Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-              builder: (context) {
-              return SignIn();
-                },
-              ),
-            );
+            //   authService.signOut();
+            //   Navigator.of(context).pushReplacement(
+            //   MaterialPageRoute(
+            //   builder: (context) {
+            //   return SignIn();
+            //     },
+            //   ),
+            // );
             },
             label: Text('Log Out'),
           )

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cet_pay/services/auth.dart';
+//import 'package:cet_pay/services/auth.dart';
 
 //Landing Page : Home Section
 
@@ -18,7 +18,8 @@ class _LandingHomeState extends State<LandingHome> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 40, 30, 40),
-              child: Text("$profileName",
+              // child: Text("$profileName",
+              child: Text("profileName",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -29,7 +30,7 @@ class _LandingHomeState extends State<LandingHome> {
               alignment: Alignment.centerRight,
               child: CircleAvatar(
                 radius: 40,
-                backgroundImage: NetworkImage(profilepicURL),
+                //backgroundImage: NetworkImage(profilepicURL),
               ),
             ),
           ],
