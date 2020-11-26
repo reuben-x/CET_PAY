@@ -27,6 +27,7 @@ class _LandingState extends State<Landing> {
             icon: Icon(Icons.person),
             onPressed: () async {
               await _auth.signOut();
+              print("Signed Out Successfully");
             },
             label: Text('Log Out'),
           )

@@ -1,5 +1,6 @@
 import 'package:cet_pay/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cet_pay/shared/loading.dart';
 
 class SignInPage extends StatefulWidget {
 
@@ -15,10 +16,13 @@ class _SignInPageState extends State<SignInPage> {
   final AuthService _auth = AuthService();
   String email = '';
   String password = '';
+  String error = '';
+  final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return isLoading? Loading() : Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,11 +113,44 @@ class _SignInPageState extends State<SignInPage> {
                         color: Colors.green,
                         elevation: 7.0,
                         child: GestureDetector(
-                          onTap: () {
-                            //work here
-                            print(email);
-                            print(password);
-                          },
+                          onTap: () async {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            dynamic result = await _auth.signInWithEmailAndPassword(email,password);
+                            if(result == null) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              return showDialog<void>(
+                                context: context,
+                                barrierDismissible: false, // user must tap button!
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Error'),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: <Widget>[
+                                          Text("Couldn't Sign In With those credentials."),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        color:Colors.white,
+                                        child: Text('Okay,got it!',style: TextStyle(
+                                          color: Colors.green,
+                                        ),),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+                              },
                           child: Center(
                             child: Text(
                               'LOGIN',
@@ -157,7 +194,6 @@ class _SignInPageState extends State<SignInPage> {
               child: InkWell(
                 onTap: () async {
                     dynamic result = await _auth.signInAnon();
-                    print("Signed In here"+result.uid);
                 },
                   child: Text(
                     'Sign In Anonymously',
