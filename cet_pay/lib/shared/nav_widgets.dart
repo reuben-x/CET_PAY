@@ -110,13 +110,14 @@ class _LandingPaymentsState extends State<LandingPayments> {
                 )),
               ),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                  child: IconButton(
-                    icon: Icon(Icons.history),
-                    color: Colors.amber,
-                    iconSize: 40,
-                    onPressed: () => _previousTransaction(context),
-                  ))
+                padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
+                child: IconButton(
+                  icon: Icon(Icons.history),
+                  color: Colors.green,
+                  iconSize: 40,
+                  onPressed: () => _previousTransaction(context),
+                ),
+              )
             ],
           ),
         ],
@@ -147,10 +148,11 @@ class _LandingSettingsState extends State<LandingSettings> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Center(
-                    child: Text(
-                  'Settings Page',
-                  style: TextStyle(fontSize: 28),
-                )),
+                  child: Text(
+                    'Settings Page',
+                    style: TextStyle(fontSize: 28),
+                  ),
+                ),
               ),
             ],
           ),

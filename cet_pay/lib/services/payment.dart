@@ -7,7 +7,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   Razorpay razorpay;
   TextEditingController textEditingController = new TextEditingController();
 
@@ -29,42 +28,38 @@ class _HomeState extends State<Home> {
     razorpay.clear();
   }
 
-  void openCheckout(){
+  void openCheckout() {
     var options = {
-      "key" : "[YOUR_API_KEY]",
-      "amount" : num.parse(textEditingController.text)*100,
+      "key": "[YOUR_API_KEY]",
+      "amount": num.parse(textEditingController.text) * 100,
       "currency": "INR",
-      "name" : "CET Pay",
-      "description" : "Payment for hostel fees",
+      "name": "CET Pay",
+      "description": "Payment for hostel fees",
       "image": "assets/images/cetlogo.jpg",
-      "prefill" : {
-        "name" : "Reuben",
-        "contact" : "2323232323",
-        "email" : "reuben@cet.ac.in"
+      "prefill": {
+        "name": "Reuben",
+        "contact": "2323232323",
+        "email": "reuben@cet.ac.in"
       },
-      "theme": {
-        "color": Colors.green
-      }
+      "theme": {"color": Colors.green}
     };
 
-    try{
+    try {
       razorpay.open(options);
-
-    }catch(e){
+    } catch (e) {
       print(e.toString());
     }
-
   }
 
-  void handlerPaymentSuccess(){
+  void handlerPaymentSuccess() {
     print("Payment success");
   }
 
-  void handlerErrorFailure(){
+  void handlerErrorFailure() {
     print("Payment error");
   }
 
-  void handlerExternalWallet(){
+  void handlerExternalWallet() {
     print("External Wallet");
   }
 
@@ -80,17 +75,18 @@ class _HomeState extends State<Home> {
           children: [
             TextField(
               controller: textEditingController,
-              decoration: InputDecoration(
-                  hintText: "amount to pay"
-              ),
+              decoration: InputDecoration(hintText: "amount to pay"),
             ),
-            SizedBox(height: 12,),
+            SizedBox(
+              height: 12,
+            ),
             RaisedButton(
               color: Colors.blue,
-              child: Text("Donate Now", style: TextStyle(
-                  color: Colors.white
-              ),),
-              onPressed: (){
+              child: Text(
+                "Donate Now",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
                 openCheckout();
               },
             )

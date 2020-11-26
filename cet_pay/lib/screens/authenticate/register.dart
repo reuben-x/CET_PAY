@@ -3,9 +3,7 @@ import 'package:cet_pay/services/auth.dart';
 import 'package:cet_pay/shared/loading.dart';
 
 class RegisterPage extends StatefulWidget {
-
   final Function toggleView;
-
 
   RegisterPage({this.toggleView});
 
@@ -21,33 +19,37 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
   bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    return isLoading ? Loading() : Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                      child: Text(
-                        'Sign Up Now',
-                        style: TextStyle(
-                            fontSize: 50.0, fontWeight: FontWeight.bold),
+    return isLoading
+        ? Loading()
+        : Scaffold(
+            resizeToAvoidBottomPadding: false,
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                        child: Text(
+                          'Sign Up Now',
+                          style: TextStyle(
+                              fontSize: 50.0, fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Container(
+                Container(
                   padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                   child: Column(
                     children: <Widget>[
                       TextFormField(
-                        validator: (val) => val.isEmpty ? 'Field Required': null,
+                        validator: (val) =>
+                            val.isEmpty ? 'Field Required' : null,
                         controller: _nameInput,
                         decoration: InputDecoration(
                             labelText: 'NAME',
@@ -59,7 +61,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 borderSide: BorderSide(color: Colors.green))),
                       ),
                       TextFormField(
-                        validator: (val) => val.isEmpty ? 'Field Required': null,
+                        validator: (val) =>
+                            val.isEmpty ? 'Field Required' : null,
                         controller: _mailInput,
                         decoration: InputDecoration(
                             labelText: 'EMAIL',
@@ -72,7 +75,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       SizedBox(height: 10.0),
                       TextFormField(
-                        validator: (val) => val.isEmpty ? 'Field Required': null,
+                        validator: (val) =>
+                            val.isEmpty ? 'Field Required' : null,
                         controller: _semInput,
                         decoration: InputDecoration(
                             labelText: 'SEMESTER ',
@@ -86,7 +90,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       SizedBox(height: 10.0),
                       TextFormField(
-                        validator: (val) => val.isEmpty ? 'Field Required': null,
+                        validator: (val) =>
+                            val.isEmpty ? 'Field Required' : null,
                         controller: _passwordInput,
                         decoration: InputDecoration(
                             labelText: 'PASSWORD ',
@@ -110,7 +115,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                dynamic result = await _auth.registerWithEmailAndPassword(_mailInput.text,_passwordInput.text);
+                                dynamic result =
+                                    await _auth.registerWithEmailAndPassword(
+                                        _mailInput.text, _passwordInput.text);
                                 setState(() {
                                   isLoading = false;
                                 });
@@ -152,28 +159,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ],
-                  )),
-              // SizedBox(height: 15.0),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: <Widget>[
-              //     Text(
-              //       'New to Spotify?',
-              //       style: TextStyle(
-              //         fontFamily: 'Montserrat',
-              //       ),
-              //     ),
-              //     SizedBox(width: 5.0),
-              //     InkWell(
-              //       child: Text('Register',
-              //           style: TextStyle(
-              //               color: Colors.green,
-              //               fontFamily: 'Montserrat',
-              //               fontWeight: FontWeight.bold,
-              //               decoration: TextDecoration.underline)),
-              //     )
-              //   ],
-              // )
-            ]));
+                  ),
+                ),
+              ],
+            ),
+          );
   }
 }
