@@ -1,69 +1,54 @@
-/*
-
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:cet_pay/screens/signin.dart';
+import 'package:cet_pay/models/user.dart';
 
-String profileName;
-String profilepicURL;
 class AuthService {
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
- Observable<User> user;  //firebase user
- Observable<Map<String, dynamic>> profile; //custom user data in firestore
- PublishSubject loading = PublishSubject();
 
-  Future<String> googleSignIn() async {
-   final GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-   final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-
-   final AuthCredential credential = GoogleAuthProvider.credential(
-     accessToken: googleSignInAuthentication.accessToken,
-     idToken: googleSignInAuthentication.idToken,
-   );
-
-   final UserCredential authResult = await _auth.signInWithCredential(credential);
-   final User user = authResult.user;
-
-   if (user != null) {
-     assert(!user.isAnonymous);
-     assert(await user.getIdToken() != null);
-
-     final User currentUser = _auth.currentUser;
-     assert(user.uid == currentUser.uid);
-
-     print('signInWithGoogle succeeded: $user');
-     profileName = user.displayName;
-     profilepicURL = user.photoURL;
-     return '$user';
-
-   }
-
-   return null;
+  // create user obj based on firebase user
+  UserProfile _userFromFirebaseUser(User user) {
+    return user != null ? UserProfile(uid: user.uid) : null;
   }
 
-  Future updateUserData (User user) async {
-   DocumentReference ref = _db.collection('users').doc(user.uid);
+  // On Auth Changed Stream
+    Stream <UserProfile> get user {
+      return _auth.authStateChanges().map(_userFromFirebaseUser);
+    }
 
-   return ref.set({
-     'uid' : user.uid,
-     'email' : user.email,
-     'photoURL' : user.photoURL,
-     'displayName' : user.displayName,
-   },);
+
+
+
+  //sign in anonymously
+  Future signInAnon() async  {
+      try {
+        UserCredential credential = await _auth.signInAnonymously();
+        User user = credential.user;
+        return user;
+      }
+      catch(e)
+      {
+          print(e.toString());
+          return null;
+      }
   }
 
-  void signOut() {
-   _auth.signOut();
-  }
+  //sign in with email and password
+
+
+  //register an account
+
+
+  //sign out
+Future signOut() async {
+    try {
+      return await _auth.signOut();
+    }
+    catch(e) {
+      print(e.toString());
+      return null;
+    }
+}
 
 
 }
-final AuthService authService = new AuthService();
-
-
- */
