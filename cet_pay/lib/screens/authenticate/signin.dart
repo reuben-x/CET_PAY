@@ -200,24 +200,6 @@ class _SignInPageState extends State<SignInPage> {
                     )
                   ],
                 ),
-                SizedBox(
-                  height: 40,
-                ),
-                Center(
-                  child: InkWell(
-                    onTap: () async {
-                      dynamic result = await _auth.signInAnon();
-                    },
-                    child: Text(
-                      'Sign In Anonymously',
-                      style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Montserrat',
-                          decoration: TextDecoration.underline),
-                    ),
-                  ),
-                ),
               ],
             ),
           );

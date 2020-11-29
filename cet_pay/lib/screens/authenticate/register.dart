@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cet_pay/services/auth.dart';
 import 'package:cet_pay/shared/loading.dart';
+import 'package:cet_pay/shared/database.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function toggleView;
@@ -14,17 +15,15 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _nameInput = TextEditingController();
   final _mailInput = TextEditingController();
-  final _semInput = TextEditingController();
+  final _admissionNumberInput = TextEditingController();
+  final _yearOfJoinInput = TextEditingController();
   final _passwordInput = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
   bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? Loading()
-        : Scaffold(
+    return isLoading ? Loading() : Scaffold(
             resizeToAvoidBottomPadding: false,
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             val.isEmpty ? 'Field Required' : null,
                         controller: _nameInput,
                         decoration: InputDecoration(
-                            labelText: 'NAME',
+                            labelText: 'Name',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -65,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             val.isEmpty ? 'Field Required' : null,
                         controller: _mailInput,
                         decoration: InputDecoration(
-                            labelText: 'EMAIL',
+                            labelText: 'CET Mail',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -77,9 +76,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         validator: (val) =>
                             val.isEmpty ? 'Field Required' : null,
-                        controller: _semInput,
+                        controller: _admissionNumberInput,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                            labelText: 'SEMESTER ',
+                            labelText: 'Admission Number',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -92,9 +92,24 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         validator: (val) =>
                             val.isEmpty ? 'Field Required' : null,
-                        controller: _passwordInput,
+                        controller: _yearOfJoinInput,
                         decoration: InputDecoration(
-                            labelText: 'PASSWORD ',
+                            labelText: 'Year Of Join',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.green))),
+                      ),
+                      SizedBox(height: 10.0),
+                      TextFormField(
+                        validator: (val) =>
+                        val.isEmpty ? 'Field Required' : null,
+                        controller: _passwordInput,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            labelText: 'Password',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
@@ -118,7 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 dynamic result =
                                     await _auth.registerWithEmailAndPassword(
                                         _mailInput.text, _passwordInput.text);
-                                setState(() {
+                                 setState(() {
                                   isLoading = false;
                                 });
                               },

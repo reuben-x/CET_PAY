@@ -1,7 +1,9 @@
 import 'dart:ui';
-
+import 'package:cet_pay/services/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-//import 'package:cet_pay/services/auth.dart';
+import 'package:cet_pay/shared/database.dart';
+import 'package:provider/provider.dart';
 
 //Landing Page : Home Section
 
@@ -11,36 +13,29 @@ class LandingHome extends StatefulWidget {
 }
 
 class _LandingHomeState extends State<LandingHome> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
+
       children: [
-        SizedBox(height: 20),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 30, 40),
-              // child: Text("$profileName",
-              child: Text(
-                "profileName",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+        SizedBox(height: 30),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              "Hey nibba",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
             ),
-            SizedBox(
-              width: 40,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: CircleAvatar(
-                radius: 40,
-                //backgroundImage: NetworkImage(profilepicURL),
-              ),
-            ),
-          ],
+          ),
         ),
+        SizedBox(height: 40,),
         Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -128,35 +123,52 @@ class _LandingPaymentsState extends State<LandingPayments> {
 
 //////////////////////////////////////////////////////
 
-//Landing Page - Settings Section
+//Landing Page - Profile Section
 
-class LandingSettings extends StatefulWidget {
+class LandingProfile extends StatefulWidget {
   @override
-  _LandingSettingsState createState() => _LandingSettingsState();
+  _LandingProfileState createState() => _LandingProfileState();
 }
 
-class _LandingSettingsState extends State<LandingSettings> {
+class _LandingProfileState extends State<LandingProfile> {
+
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
-                  child: Text(
-                    'Settings Page',
-                    style: TextStyle(fontSize: 28),
+    return StreamProvider<QuerySnapshot>.value(
+      value:DatabaseService().users,
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Center(
+                    child: Text(
+                      'Profile Page',
+                      style: TextStyle(fontSize: 28),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+            SizedBox(height: 500),
+            FlatButton.icon(
+              color: Colors.green,
+              icon: Icon(Icons.person,color: Colors.white,),
+              onPressed: () async {
+                await _auth.signOut();
+                print("Signed Out Successfully");
+              },
+              label: Text('Log Out',style: TextStyle(
+                color: Colors.white,
+              ),),
+            )
+          ],
+        ),
       ),
     );
   }

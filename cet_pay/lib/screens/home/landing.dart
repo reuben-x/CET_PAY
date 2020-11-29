@@ -13,25 +13,15 @@ class _LandingState extends State<Landing> {
   int _currentIndex = 0;
   PageController _pageController = PageController();
 
-  final AuthService _auth = AuthService();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('CET Pay'),
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.green,
         elevation: 0,
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            onPressed: () async {
-              await _auth.signOut();
-              print("Signed Out Successfully");
-            },
-            label: Text('Log Out'),
-          )
-        ],
       ),
       body: PageView(
         controller: _pageController,
@@ -43,7 +33,7 @@ class _LandingState extends State<Landing> {
         children: <Widget>[
           LandingHome(),
           LandingPayments(),
-          LandingSettings(),
+          LandingProfile(),
         ],
       ),
 
@@ -61,8 +51,8 @@ class _LandingState extends State<Landing> {
 
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings,color: Colors.black),
-            title : Text('Settings',style: TextStyle(color: Colors.black),),
+            icon: Icon(Icons.account_circle,color: Colors.black),
+            title : Text('Profile',style: TextStyle(color: Colors.black),),
           ),
         ],
        onTap: (index) {

@@ -1,3 +1,4 @@
+import 'package:cet_pay/shared/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cet_pay/models/user.dart';
 
@@ -14,17 +15,6 @@ class AuthService {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
 
-  //sign in anonymously
-  Future signInAnon() async {
-    try {
-      UserCredential credential = await _auth.signInAnonymously();
-      User user = credential.user;
-      return user;
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
 
   //sign in with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
@@ -45,6 +35,9 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
+
+      //Create a new document for the user with uid
+      await DatabaseService(uid: user.uid).updateUserData(180004, 'mech', 'blahblah', 'kevin', '123',2018);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
