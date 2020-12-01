@@ -39,20 +39,23 @@ class _LandingState extends State<Landing> {
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
+        selectedItemColor: Colors.green,
+        selectedFontSize: 15,
+        unselectedItemColor: Colors.black,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home,color: Colors.black ,),
-            title : Text('Home',style: TextStyle(color: Colors.black),),
+            icon: Icon(Icons.home,),
+            title : Text('Home'),
 
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.euro_symbol,color: Colors.black),
-             title : Text('Payments',style: TextStyle(color: Colors.black),),
+            icon: Icon(Icons.euro_symbol),
+             title : Text('Payments'),
 
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle,color: Colors.black),
-            title : Text('Profile',style: TextStyle(color: Colors.black),),
+            icon: Icon(Icons.account_circle),
+            title : Text('Profile'),
           ),
         ],
        onTap: (index) {

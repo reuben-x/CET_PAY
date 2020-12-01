@@ -155,7 +155,7 @@ class _LandingProfileState extends State<LandingProfile> {
                 ),
               ],
             ),
-            SizedBox(height: 500),
+            SizedBox(height: 450),
             FlatButton.icon(
               color: Colors.green,
               icon: Icon(Icons.person,color: Colors.white,),

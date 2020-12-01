@@ -8,11 +8,10 @@ class DatabaseService{
   //collection reference
   final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
 
-  Future updateUserData(int admissionNo,String department,String mailId,String name,String roll,int yearOfJoin) async
+  Future updateUserData(String admissionNo,String mailId,String name,String roll,String yearOfJoin) async
   {
       return await userCollection.doc(uid).set({
         'admissionNo' :admissionNo,
-        'department' : department,
         'mailId' : mailId,
         'name' : name,
         'roll' : roll,

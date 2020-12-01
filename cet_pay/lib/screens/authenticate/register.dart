@@ -16,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _nameInput = TextEditingController();
   final _mailInput = TextEditingController();
   final _admissionNumberInput = TextEditingController();
+  final _rollNumberInput = TextEditingController();
   final _yearOfJoinInput = TextEditingController();
   final _passwordInput = TextEditingController();
   final AuthService _auth = AuthService();
@@ -25,19 +26,27 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return isLoading ? Loading() : Scaffold(
             resizeToAvoidBottomPadding: false,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: new IconButton(
+                icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
+                onPressed: () => widget.toggleView()
+              ),
+            ),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
                   child: Stack(
                     children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          'Sign Up Now',
-                          style: TextStyle(
-                              fontSize: 50.0, fontWeight: FontWeight.bold),
-                        ),
+                            'Sign Up Now',
+                            style: TextStyle(
+                                fontSize: 45.0, fontWeight: FontWeight.bold),
+                          ),
                       ),
                     ],
                   ),
@@ -86,7 +95,20 @@ class _RegisterPageState extends State<RegisterPage> {
                                 color: Colors.grey),
                             focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.green))),
-                        obscureText: true,
+                      ),
+                      TextFormField(
+                        validator: (val) =>
+                        val.isEmpty ? 'Field Required' : null,
+                        controller: _rollNumberInput,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            labelText: 'Roll Number',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.green))),
                       ),
                       SizedBox(height: 10.0),
                       TextFormField(
@@ -131,8 +153,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   isLoading = true;
                                 });
                                 dynamic result =
-                                    await _auth.registerWithEmailAndPassword(
-                                        _mailInput.text, _passwordInput.text);
+                                    await _auth.registerWithEmailAndPassword
+                                      (_mailInput.text, _passwordInput.text,_admissionNumberInput.text,_rollNumberInput.text,_nameInput.text,_yearOfJoinInput.text);
+
                                  setState(() {
                                   isLoading = false;
                                 });
@@ -148,31 +171,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                           )),
-                      SizedBox(height: 20.0),
-                      Container(
-                        height: 40.0,
-                        color: Colors.transparent,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black,
-                                  style: BorderStyle.solid,
-                                  width: 1.0),
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: InkWell(
-                            onTap: () {
-                              widget.toggleView();
-                            },
-                            child: Center(
-                              child: Text('Go Back',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Montserrat')),
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
