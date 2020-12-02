@@ -1,4 +1,3 @@
-import 'package:cet_pay/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cet_pay/shared/nav_widgets.dart';
 class Landing extends StatefulWidget {
@@ -18,11 +17,6 @@ class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('CET Pay'),
-        backgroundColor: Colors.green,
-        elevation: 0,
-      ),
       body: PageView(
         controller: _pageController,
         onPageChanged: (page){
@@ -38,6 +32,7 @@ class _LandingState extends State<Landing> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 5,
         currentIndex: _currentIndex,
         selectedItemColor: Colors.green,
         selectedFontSize: 15,

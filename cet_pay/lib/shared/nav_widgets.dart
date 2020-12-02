@@ -18,42 +18,58 @@ class _LandingHomeState extends State<LandingHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-
-      children: [
-        SizedBox(height: 30),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              "Hey nibba",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 20,10, 0),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5, 20, 10, 40),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: ListTile(
+                title: Text('Hello!',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
+                subtitle: Text('Kevin M Thazhathoot',style: TextStyle(fontSize: 18),),
               ),
             ),
           ),
-        ),
-        SizedBox(height: 40,),
-        Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const ListTile(
-                title: Text(
-                  "Payment Status",
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
-                ),
-                subtitle: Text("Hostel Fees Paid"),
+          Container(
+            height: 165,
+            child: Card(
+              elevation: 10,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
               ),
-            ],
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+
+                children: <Widget>[
+                  const ListTile(
+                    leading: Icon(Icons.attach_money),
+                    title: Text('Hostel Fees - November 2020',style: TextStyle(fontSize: 20),),
+                  ),
+                  SizedBox(height: 45),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      FlatButton(
+                        child: const Text('NOTIFY ME LATER'),
+                        onPressed: () {/* ... */},
+                      ),
+                      const SizedBox(width: 8),
+                      FlatButton(
+                        child: const Text('PAY NOW',style: TextStyle(color: Colors.green),),
+                        onPressed: () {/* ... */},
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        Divider(),
-      ],
+          Divider(),
+        ],
+      ),
     );
   }
 }
@@ -157,6 +173,8 @@ class _LandingProfileState extends State<LandingProfile> {
             ),
             SizedBox(height: 450),
             FlatButton.icon(
+              shape:RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),) ,
               color: Colors.green,
               icon: Icon(Icons.person,color: Colors.white,),
               onPressed: () async {

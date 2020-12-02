@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cet_pay/services/auth.dart';
 import 'package:cet_pay/shared/loading.dart';
-import 'package:cet_pay/shared/database.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function toggleView;
