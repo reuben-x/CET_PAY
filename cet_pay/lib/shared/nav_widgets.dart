@@ -1,193 +1,240 @@
-import 'dart:ui';
-import 'package:cet_pay/services/auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:cet_pay/shared/database.dart';
-import 'package:provider/provider.dart';
-
-//Landing Page : Home Section
-
-class LandingHome extends StatefulWidget {
-  @override
-  _LandingHomeState createState() => _LandingHomeState();
-}
-
-class _LandingHomeState extends State<LandingHome> {
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 20,10, 0),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(5, 20, 10, 40),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: ListTile(
-                title: Text('Hello!',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-                subtitle: Text('Kevin M Thazhathoot',style: TextStyle(fontSize: 18),),
-              ),
-            ),
-          ),
-          Container(
-            height: 165,
-            child: Card(
-              elevation: 10,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-
-                children: <Widget>[
-                  const ListTile(
-                    leading: Icon(Icons.attach_money),
-                    title: Text('Hostel Fees - November 2020',style: TextStyle(fontSize: 20),),
-                  ),
-                  SizedBox(height: 45),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      FlatButton(
-                        child: const Text('NOTIFY ME LATER'),
-                        onPressed: () {/* ... */},
-                      ),
-                      const SizedBox(width: 8),
-                      FlatButton(
-                        child: const Text('PAY NOW',style: TextStyle(color: Colors.green),),
-                        onPressed: () {/* ... */},
-                      ),
-                      const SizedBox(width: 8),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Divider(),
-        ],
-      ),
-    );
-  }
-}
-//////////////////////////////////////////////////////
-
-//Landing Page - Payment Section
-
-class LandingPayments extends StatefulWidget {
-  @override
-  _LandingPaymentsState createState() => _LandingPaymentsState();
-}
-
-class _LandingPaymentsState extends State<LandingPayments> {
-  void _previousTransaction(BuildContext ctx) {
-    showModalBottomSheet(
-      context: ctx,
-      builder: (_) {
-        return GestureDetector(
-          onTap: () {},
-          child: Text(
-            "Previous transactions will show up here !!",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              height: 20,
-            ),
-          ),
-          behavior: HitTestBehavior.opaque,
-        );
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
-                    child: Text(
-                  'Payments Page',
-                  style: TextStyle(fontSize: 28),
-                )),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                child: IconButton(
-                  icon: Icon(Icons.history),
-                  color: Colors.green,
-                  iconSize: 40,
-                  onPressed: () => _previousTransaction(context),
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-//////////////////////////////////////////////////////
-
-//Landing Page - Profile Section
-
-class LandingProfile extends StatefulWidget {
-  @override
-  _LandingProfileState createState() => _LandingProfileState();
-}
-
-class _LandingProfileState extends State<LandingProfile> {
-
-  final AuthService _auth = AuthService();
-  @override
-  Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapshot>.value(
-      value:DatabaseService().users,
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Center(
-                    child: Text(
-                      'Profile Page',
-                      style: TextStyle(fontSize: 28),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 450),
-            FlatButton.icon(
-              shape:RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),) ,
-              color: Colors.green,
-              icon: Icon(Icons.person,color: Colors.white,),
-              onPressed: () async {
-                await _auth.signOut();
-                print("Signed Out Successfully");
-              },
-              label: Text('Log Out',style: TextStyle(
-                color: Colors.white,
-              ),),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
+// import 'dart:math';
+// import 'dart:ui';
+// import 'package:cet_pay/services/auth.dart';
+// import 'package:cet_pay/services/payment.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+// import 'package:cet_pay/shared/database.dart';
+// import 'package:provider/provider.dart';
+//
+// //Landing Page : Home Section
+//
+// class LandingHome extends StatefulWidget {
+//   @override
+//   _LandingHomeState createState() => _LandingHomeState();
+// }
+//
+// class _LandingHomeState extends State<LandingHome> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+//       child: Column(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.fromLTRB(5, 20, 10, 40),
+//             child: Align(
+//               alignment: Alignment.centerLeft,
+//               child: ListTile(
+//                 title: Text(
+//                   'Hello!',
+//                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+//                 ),
+//                 subtitle: Text(
+//                   'Kevin M Thazhathoot',
+//                   style: TextStyle(fontSize: 18),
+//                 ),
+//               ),
+//             ),
+//           ),
+//           Container(
+//             height: 165,
+//             child: Card(
+//               elevation: 10,
+//               shape: RoundedRectangleBorder(
+//                 side: BorderSide(
+//                   color: Colors.green,
+//                   width: 2.0,
+//                 ),
+//                 borderRadius: BorderRadius.circular(10),
+//               ),
+//               child: Column(
+//                 mainAxisSize: MainAxisSize.min,
+//                 children: <Widget>[
+//                   Padding(
+//                     padding: const EdgeInsets.all(15.0),
+//                     child: Text('Hostel Fees - November 2020',
+//                         style: TextStyle(
+//                             fontSize: 20, fontWeight: FontWeight.bold)),
+//                   ),
+//                   Divider(
+//                     color: Colors.black,
+//                     thickness: 1,
+//                     height: 0,
+//                     indent: 110,
+//                     endIndent: 110,
+//                   ),
+//                   Expanded(
+//                     child: Center(
+//                       child: Text(
+//                         '\u{20B9} 2000',
+//                         style: TextStyle(
+//                           color: Colors.teal,
+//                           fontWeight: FontWeight.bold,
+//                           fontSize: 40,
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.end,
+//                     children: <Widget>[
+//                       FlatButton(
+//                         child: const Text('NOTIFY ME LATER'),
+//                         onPressed: () {
+//                           /* ... */
+//                         },
+//                       ),
+//                       const SizedBox(width: 8),
+//                       FlatButton(
+//                         child: const Text(
+//                           'PAY NOW',
+//                           style: TextStyle(color: Colors.green),
+//                         ),
+//                         onPressed: () {
+//                           _navigateToNextScreen(context);
+//                         },
+//                       ),
+//                       const SizedBox(width: 8),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//           Divider(),
+//         ],
+//       ),
+//     );
+//   }
+// }
+// void _navigateToNextScreen(BuildContext context) {
+//   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
+// }
+//
+// //////////////////////////////////////////////////////
+//
+// //Landing Page - Payment Section
+//
+// class LandingPayments extends StatefulWidget {
+//   @override
+//   _LandingPaymentsState createState() => _LandingPaymentsState();
+// }
+//
+// class _LandingPaymentsState extends State<LandingPayments> {
+//   void _previousTransaction(BuildContext ctx) {
+//     showModalBottomSheet(
+//       context: ctx,
+//       builder: (_) {
+//         return GestureDetector(
+//           onTap: () {},
+//           child: Text(
+//             "Previous transactions will show up here !!",
+//             style: TextStyle(
+//               fontSize: 20,
+//               fontWeight: FontWeight.bold,
+//               height: 20,
+//             ),
+//           ),
+//           behavior: HitTestBehavior.opaque,
+//         );
+//       },
+//     );
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         children: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//               Padding(
+//                 padding: const EdgeInsets.all(20.0),
+//                 child: Center(
+//                     child: Text(
+//                   'Payments Page',
+//                   style: TextStyle(fontSize: 28),
+//                 )),
+//               ),
+//               Padding(
+//                 padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
+//                 child: IconButton(
+//                   icon: Icon(Icons.history),
+//                   color: Colors.green,
+//                   iconSize: 40,
+//                   onPressed: () => _previousTransaction(context),
+//                 ),
+//               )
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+//
+// //////////////////////////////////////////////////////
+//
+// //Landing Page - Profile Section
+//
+// class LandingProfile extends StatefulWidget {
+//   @override
+//   _LandingProfileState createState() => _LandingProfileState();
+// }
+//
+// class _LandingProfileState extends State<LandingProfile> {
+//   final AuthService _auth = AuthService();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamProvider<QuerySnapshot>.value(
+//       value: DatabaseService().users,
+//       child: Container(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           children: [
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               children: [
+//                 Padding(
+//                   padding: const EdgeInsets.all(20.0),
+//                   child: Center(
+//                     child: Text(
+//                       'Profile Page',
+//                       style: TextStyle(fontSize: 28),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             Spacer(),
+//             FlatButton.icon(
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.circular(18.0),
+//               ),
+//               color: Colors.green,
+//               icon: Icon(
+//                 Icons.person,
+//                 color: Colors.white,
+//               ),
+//               onPressed: () async {
+//                 await _auth.signOut();
+//                 print("Signed Out Successfully");
+//               },
+//               label: Text(
+//                 'Log Out',
+//                 style: TextStyle(
+//                   color: Colors.white,
+//                 ),
+//               ),
+//             ),
+//             Spacer(),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

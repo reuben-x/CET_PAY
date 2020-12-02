@@ -23,15 +23,16 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading ? Loading() : Scaffold(
+    return isLoading
+        ? Loading()
+        : Scaffold(
             resizeToAvoidBottomPadding: false,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
               leading: new IconButton(
-                icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
-                onPressed: () => widget.toggleView()
-              ),
+                  icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
+                  onPressed: () => widget.toggleView()),
             ),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,10 +43,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                            'Sign Up Now',
-                            style: TextStyle(
-                                fontSize: 45.0, fontWeight: FontWeight.bold),
-                          ),
+                          'Sign Up Now',
+                          style: TextStyle(
+                              fontSize: 45.0, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),
@@ -97,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       TextFormField(
                         validator: (val) =>
-                        val.isEmpty ? 'Field Required' : null,
+                            val.isEmpty ? 'Field Required' : null,
                         controller: _rollNumberInput,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -126,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(height: 10.0),
                       TextFormField(
                         validator: (val) =>
-                        val.isEmpty ? 'Field Required' : null,
+                            val.isEmpty ? 'Field Required' : null,
                         controller: _passwordInput,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -152,10 +153,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                   isLoading = true;
                                 });
                                 dynamic result =
-                                    await _auth.registerWithEmailAndPassword
-                                      (_mailInput.text, _passwordInput.text,_admissionNumberInput.text,_rollNumberInput.text,_nameInput.text,_yearOfJoinInput.text);
+                                    await _auth.registerWithEmailAndPassword(
+                                        _mailInput.text,
+                                        _passwordInput.text,
+                                        _admissionNumberInput.text,
+                                        _rollNumberInput.text,
+                                        _nameInput.text,
+                                        _yearOfJoinInput.text);
 
-                                 setState(() {
+                                setState(() {
                                   isLoading = false;
                                 });
                               },
