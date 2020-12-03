@@ -2,6 +2,9 @@ import 'package:cet_pay/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cet_pay/shared/loading.dart';
+import 'package:toast/toast.dart';
+
+import 'errors.dart';
 
 class SignInPage extends StatefulWidget {
   final Function toggleView;
@@ -106,7 +109,15 @@ class _SignInPageState extends State<SignInPage> {
                                   });
                                   dynamic result =
                                       await _auth.signInWithEmailAndPassword(
-                                          email, password);
+                                          email, password).catchError((onError) {
+                                        Toast.show(
+                                          Errors.show(onError.code),
+                                          context,
+                                          gravity: Toast.CENTER,
+                                          backgroundColor: Colors.green[200],
+                                          duration: 3,
+                                        );
+                                      });
                                   if (result == null) {
                                     setState(() {
                                       isLoading = false;

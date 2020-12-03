@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cet_pay/services/auth.dart';
 import 'package:cet_pay/shared/loading.dart';
+import 'package:toast/toast.dart';
+
+import 'errors.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function toggleView;
@@ -176,14 +179,23 @@ class _RegisterPageState extends State<RegisterPage> {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                dynamic result =
-                                    await _auth.registerWithEmailAndPassword(
+                                dynamic result = await _auth
+                                    .registerWithEmailAndPassword(
                                         _mailInput.text,
                                         _passwordInput.text,
                                         _admissionNumberInput.text,
                                         _rollNumberInput.text,
                                         _nameInput.text,
-                                        _yearOfJoinInput.text);
+                                        _yearOfJoinInput.text)
+                                    .catchError((onError) {
+                                  Toast.show(
+                                    Errors.show(onError.code),
+                                    context,
+                                    gravity: Toast.CENTER,
+                                    backgroundColor: Colors.green[200],
+                                    duration: 3,
+                                  );
+                                });
 
                                 setState(() {
                                   isLoading = false;
