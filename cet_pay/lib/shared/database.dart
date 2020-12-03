@@ -20,6 +20,10 @@ class DatabaseService {
     });
   }
 
+  getUserData(String mailId) async {
+    return await FirebaseFirestore.instance.collection('users').where("mailId",isEqualTo: mailId).get();
+  }
+
   //get user stream
   Stream<QuerySnapshot> get users {
     return userCollection.snapshots();
