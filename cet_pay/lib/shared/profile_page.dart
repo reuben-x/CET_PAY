@@ -1,11 +1,11 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:cet_pay/services/auth.dart';
-import 'package:cet_pay/services/payment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cet_pay/shared/database.dart';
 import 'package:provider/provider.dart';
+import 'package:cet_pay/dark_mode/provider.dart';
 
 class LandingProfile extends StatefulWidget {
   @override
@@ -14,9 +14,10 @@ class LandingProfile extends StatefulWidget {
 
 class _LandingProfileState extends State<LandingProfile> {
   final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
+
     return StreamProvider<QuerySnapshot>.value(
       value: DatabaseService().users,
       child: Container(
@@ -42,7 +43,7 @@ class _LandingProfileState extends State<LandingProfile> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.0),
               ),
-              color: Colors.green,
+              color: Theme.of(context).primaryColor,
               icon: Icon(
                 Icons.person,
                 color: Colors.white,
@@ -58,6 +59,11 @@ class _LandingProfileState extends State<LandingProfile> {
                 ),
               ),
             ),
+            Checkbox(
+                value: themeChange.darkTheme,
+                onChanged: (bool value) {
+                  themeChange.darkTheme = value;
+                }),
             Spacer(),
           ],
         ),

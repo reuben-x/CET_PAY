@@ -41,13 +41,16 @@ class _SignInPageState extends State<SignInPage> {
                         children: <Widget>[
                           TextField(
                             decoration: InputDecoration(
-                                labelText: 'CET Mail',
-                                labelStyle: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    color: Colors.black),
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.green))),
+                              labelText: 'CET Mail',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ),
                             onChanged: (val) {
                               setState(() {
                                 email = val;
@@ -62,7 +65,9 @@ class _SignInPageState extends State<SignInPage> {
                                   fontFamily: 'Montserrat',
                                   color: Colors.black),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.green),
+                                borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                ),
                               ),
                             ),
                             obscureText: true,
@@ -91,7 +96,7 @@ class _SignInPageState extends State<SignInPage> {
                             height: 40.0,
                             child: Material(
                               borderRadius: BorderRadius.circular(20.0),
-                              shadowColor: Colors.green,
+                              shadowColor: Theme.of(context).primaryColor,
                               color: Colors.black,
                               elevation: 7.0,
                               child: GestureDetector(
@@ -127,7 +132,8 @@ class _SignInPageState extends State<SignInPage> {
                                               child: Text(
                                                 'Okay,got it!',
                                                 style: TextStyle(
-                                                  color: Colors.green,
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
                                                 ),
                                               ),
                                               onPressed: () {

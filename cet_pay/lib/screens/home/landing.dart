@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-//import 'package:cet_pay/shared/nav_widgets.dart';
 import 'package:cet_pay/shared/home_page.dart';
 import 'package:cet_pay/shared/payments_page.dart';
 import 'package:cet_pay/shared/profile_page.dart';
@@ -33,7 +32,7 @@ class _LandingState extends State<Landing> {
       bottomNavigationBar: BottomNavigationBar(
         elevation: 5,
         currentIndex: _currentIndex,
-        selectedItemColor: Colors.green,
+        selectedItemColor: Theme.of(context).primaryColor,
         selectedFontSize: 15,
         unselectedItemColor: Colors.black,
         items: const <BottomNavigationBarItem>[

@@ -45,6 +45,10 @@ class _LandingHomeState extends State<LandingHome> {
         "contact": "918714829999",
         "email": "reuben@cet.ac.in"
       },
+      "theme":{
+        "hide_topbar":true,
+        "color":"#000000"
+      }
     };
 
     try {
@@ -91,7 +95,7 @@ class _LandingHomeState extends State<LandingHome> {
               elevation: 10,
               shape: RoundedRectangleBorder(
                 side: BorderSide(
-                  color: Colors.green,
+                  color: Theme.of(context).primaryColor,
                   width: 2.0,
                 ),
                 borderRadius: BorderRadius.circular(10),
@@ -117,7 +121,7 @@ class _LandingHomeState extends State<LandingHome> {
                       child: Text(
                         '\u{20B9} 2000',
                         style: TextStyle(
-                          color: Colors.teal,
+                          color: Theme.of(context).accentColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
                         ),
@@ -135,9 +139,9 @@ class _LandingHomeState extends State<LandingHome> {
                       ),
                       const SizedBox(width: 8),
                       FlatButton(
-                        child: const Text(
+                        child: Text(
                           'PAY NOW',
-                          style: TextStyle(color: Colors.green),
+                          style: TextStyle(color: Theme.of(context).primaryColor),
                         ),
                         onPressed: () {
                           openCheckout();

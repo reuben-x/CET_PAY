@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:cet_pay/services/auth.dart';
-import 'package:cet_pay/services/payment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cet_pay/shared/database.dart';
@@ -54,7 +53,7 @@ class _LandingPaymentsState extends State<LandingPayments> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                 child: IconButton(
                   icon: Icon(Icons.history),
-                  color: Colors.green,
+                  color: Theme.of(context).primaryColor,
                   iconSize: 40,
                   onPressed: () => _previousTransaction(context),
                 ),

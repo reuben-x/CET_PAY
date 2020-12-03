@@ -60,26 +60,34 @@ class _RegisterPageState extends State<RegisterPage> {
                             val.isEmpty ? 'Field Required' : null,
                         controller: _nameInput,
                         decoration: InputDecoration(
-                            labelText: 'Name',
-                            labelStyle: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.green))),
+                          labelText: 'Name',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
                       ),
                       TextFormField(
                         validator: (val) =>
                             val.isEmpty ? 'Field Required' : null,
                         controller: _mailInput,
                         decoration: InputDecoration(
-                            labelText: 'CET Mail',
-                            labelStyle: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.green))),
+                          labelText: 'CET Mail',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(height: 10.0),
                       TextFormField(
@@ -88,13 +96,17 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _admissionNumberInput,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                            labelText: 'Admission Number',
-                            labelStyle: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.green))),
+                          labelText: 'Admission Number',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
                       ),
                       TextFormField(
                         validator: (val) =>
@@ -102,13 +114,17 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _rollNumberInput,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                            labelText: 'Roll Number',
-                            labelStyle: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.green))),
+                          labelText: 'Roll Number',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(height: 10.0),
                       TextFormField(
@@ -116,13 +132,17 @@ class _RegisterPageState extends State<RegisterPage> {
                             val.isEmpty ? 'Field Required' : null,
                         controller: _yearOfJoinInput,
                         decoration: InputDecoration(
-                            labelText: 'Year Of Join',
-                            labelStyle: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.green))),
+                          labelText: 'Year Of Join',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(height: 10.0),
                       TextFormField(
@@ -131,21 +151,25 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _passwordInput,
                         obscureText: true,
                         decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.green))),
+                          labelText: 'Password',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(height: 50.0),
                       Container(
                           height: 40.0,
                           child: Material(
                             borderRadius: BorderRadius.circular(20.0),
-                            shadowColor: Colors.greenAccent,
-                            color: Colors.green,
+                            shadowColor: Theme.of(context).accentColor,
+                            color: Theme.of(context).primaryColor,
                             elevation: 7.0,
                             child: GestureDetector(
                               onTap: () async {
