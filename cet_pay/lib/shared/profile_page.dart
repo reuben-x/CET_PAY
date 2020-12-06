@@ -7,9 +7,11 @@ import 'package:cet_pay/shared/database.dart';
 import 'package:provider/provider.dart';
 import 'package:cet_pay/dark_mode/provider.dart';
 
+String emailId;
 class LandingProfile extends StatefulWidget {
   @override
   _LandingProfileState createState() => _LandingProfileState();
+
 }
 
 class _LandingProfileState extends State<LandingProfile> {
@@ -17,30 +19,36 @@ class _LandingProfileState extends State<LandingProfile> {
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
-
-    return StreamProvider<QuerySnapshot>.value(
-      value: DatabaseService().users,
-     child: SettingsList(
-
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('users').where('mailId',isEqualTo: emailId).snapshots(),
+      builder: (context,snapshot){
+        if(!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+        return SettingsList(
        sections: [
          SettingsSection(
            title: 'Profile Details',
            tiles: [
              SettingsTile(
                title: 'College Mail ID',
-               trailing: Text('kevinmt@cet.ac.in'),
+               trailing: Text(snapshot.data.documents[0]['name']),
              ),
              SettingsTile(
                title: 'Admission Number',
-               trailing: Text('180004'),
+               trailing: Text(snapshot.data.documents[0]['admissionNo']),
              ),
              SettingsTile(
                title: 'Roll Number',
-               trailing: Text('TVE18CS028'),
+               trailing: Text(snapshot.data.documents[0]['roll']),
              ),
              SettingsTile(
                title: 'Year of Admission',
-               trailing: Text('2018'),
+               trailing: Text(snapshot.data.documents[0]['yearOfJoin']),
              ),
 
            ],
@@ -111,17 +119,9 @@ class _LandingProfileState extends State<LandingProfile> {
            ],
          ),
        ],
-     )
+     );
+  }
     );
   }
 }
-
-
-
-
-
-// Checkbox(
-// value: themeChange.darkTheme,
-// onChanged: (bool value) {
-// themeChange.darkTheme = value;
-// }),
+void getMailId(String email) {emailId = email;}

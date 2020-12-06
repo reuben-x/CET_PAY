@@ -1,3 +1,4 @@
+import 'package:cet_pay/shared/profile_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -19,13 +20,16 @@ class DatabaseService {
       'yearOfJoin': yearOfJoin,
     });
   }
-
-  getUserData(String mailId) async {
-    return await FirebaseFirestore.instance.collection('users').where("mailId",isEqualTo: mailId).get();
-  }
-
   //get user stream
   Stream<QuerySnapshot> get users {
     return userCollection.snapshots();
   }
+
+  void getUserData() async {
+    QuerySnapshot userList = await FirebaseFirestore.instance.collection('users').get();
+
+    print(userList.docs.toList());
+
+  }
+
 }

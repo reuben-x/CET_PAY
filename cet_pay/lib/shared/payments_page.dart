@@ -1,10 +1,6 @@
-import 'dart:math';
+
 import 'dart:ui';
-import 'package:cet_pay/services/auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:cet_pay/shared/database.dart';
-import 'package:provider/provider.dart';
 
 class LandingPayments extends StatefulWidget {
   @override

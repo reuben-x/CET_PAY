@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cet_pay/shared/loading.dart';
 import 'package:toast/toast.dart';
+import 'package:cet_pay/shared/profile_page.dart';
 
 import 'errors.dart';
 
@@ -118,6 +119,7 @@ class _SignInPageState extends State<SignInPage> {
                                           duration: 3,
                                         );
                                       });
+                                  getMailId(email);
                                   if (result == null) {
                                     setState(() {
                                       isLoading = false;
