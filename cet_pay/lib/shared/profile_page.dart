@@ -78,21 +78,21 @@ class _LandingProfileState extends State<LandingProfile> {
            title: 'About',
            tiles: [
              SettingsTile(
-               title: 'View Licenses',
-               leading: Icon(Icons.extension),
+               title: 'About Us',
+               leading: Icon(Icons.feedback),
                onTap: () {
                  return showDialog<void>(
                    context: context,
                    barrierDismissible: false, // user must tap button!
                    builder: (BuildContext context) {
                      return AlertDialog(
-                       title: Text('Licenses'),
+                       title: Text('About Us'),
                        content: SingleChildScrollView(
                          child: ListBody(
                            children: <Widget>[
                              Text('Designed by Project X Team.'),
                              SizedBox(height: 5),
-                             Text('Application developed using Flutter and Firebase.',style: TextStyle(fontSize: 15),),
+                             Text('Application developed using Flutter and Firebase.'),
                            ],
                          ),
                        ),
