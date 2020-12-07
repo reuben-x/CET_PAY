@@ -33,8 +33,9 @@ class _LandingState extends State<Landing> {
         elevation: 5,
         currentIndex: _currentIndex,
         selectedItemColor: Theme.of(context).primaryColor,
-        selectedFontSize: 15,
-        unselectedItemColor: Colors.black,
+        selectedFontSize: 16,
+        unselectedFontSize: 13,
+        selectedIconTheme: IconThemeData(size: 33),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
