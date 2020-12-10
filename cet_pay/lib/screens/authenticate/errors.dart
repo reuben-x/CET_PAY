@@ -1,4 +1,4 @@
-class Errors {
+class ErrorsRegister {
   static String show(String errorCode) {
     switch (errorCode) {
       case 'email-already-in-use':
@@ -13,6 +13,20 @@ class Errors {
       case 'weak-password':
         return "Password is weak";
 
+      default: print(errorCode);
+        return "Unknown error";
+    }
+  }
+}
+
+
+
+class ErrorsSignIn {
+  static String show(String errorCode) {
+    switch (errorCode) {
+      case 'invalid-email':
+        return "The email address is invalid";
+
       case 'user-disabled':
         return "User account has been disabled";
 
@@ -23,7 +37,7 @@ class Errors {
         return "Email address or password is incorrect.";
 
       default: print(errorCode);
-        return "An error has occurred";
+      return "Unknown error";
     }
   }
 }
