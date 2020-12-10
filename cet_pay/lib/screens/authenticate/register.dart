@@ -1,9 +1,8 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cet_pay/services/auth.dart';
 import 'package:cet_pay/shared/loading.dart';
-import 'package:toast/toast.dart';
 import 'package:cet_pay/shared/profile_page.dart';
-
 import 'errors.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -180,7 +179,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                dynamic result = await _auth
+                                //dynamic result =
+                                await _auth
                                     .registerWithEmailAndPassword(
                                         _mailInput.text,
                                         _passwordInput.text,
@@ -189,13 +189,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                         _nameInput.text,
                                         _yearOfJoinInput.text)
                                     .catchError((onError) {
-                                  Toast.show(
-                                    Errors.show(onError.code),
-                                    context,
-                                    gravity: Toast.CENTER,
-                                    backgroundColor: Colors.green[200],
-                                    duration: 3,
-                                  );
+                                  Flushbar(
+                                    title: "Error!",
+                                    message: ErrorsRegister.show(onError.code),
+                                    duration: Duration(seconds: 5),
+                                    backgroundColor: Colors.red,
+                                    isDismissible: true,
+                                  )..show(context);
                                 });
                                 getMailId(_mailInput.text);
                                 setState(() {

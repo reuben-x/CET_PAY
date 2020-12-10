@@ -1,8 +1,8 @@
 import 'package:cet_pay/services/auth.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cet_pay/shared/loading.dart';
-import 'package:toast/toast.dart';
 import 'package:cet_pay/shared/profile_page.dart';
 
 import 'errors.dart';
@@ -108,55 +108,23 @@ class _SignInPageState extends State<SignInPage> {
                                   setState(() {
                                     isLoading = true;
                                   });
-                                  dynamic result =
-                                      await _auth.signInWithEmailAndPassword(
-                                          email, password).catchError((onError) {
-                                        Toast.show(
-                                          Errors.show(onError.code),
-                                          context,
-                                          gravity: Toast.CENTER,
-                                          backgroundColor: Colors.green[200],
-                                          duration: 3,
-                                        );
-                                      });
+                                  dynamic result = await _auth
+                                      .signInWithEmailAndPassword(
+                                          email, password)
+                                      .catchError((onError) {
+                                    Flushbar(
+                                      title: "Error!",
+                                      message: ErrorsSignIn.show(onError.code),
+                                      duration: Duration(seconds: 5),
+                                      backgroundColor: Colors.red,
+                                      isDismissible: true,
+                                    )..show(context);
+                                  });
                                   getMailId(email);
                                   if (result == null) {
                                     setState(() {
                                       isLoading = false;
                                     });
-                                    return showDialog<void>(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      // user must tap button!
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text('Error'),
-                                          content: SingleChildScrollView(
-                                            child: ListBody(
-                                              children: <Widget>[
-                                                Text(
-                                                    "Couldn't Sign In With those credentials."),
-                                              ],
-                                            ),
-                                          ),
-                                          actions: <Widget>[
-                                            FlatButton(
-                                              color: Colors.white,
-                                              child: Text(
-                                                'Okay,got it!',
-                                                style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
                                   }
                                 },
                                 child: Center(

@@ -11,54 +11,65 @@ class LandingHome extends StatefulWidget {
 }
 
 class _LandingHomeState extends State<LandingHome> {
-  Razorpay razorpay;
+  Razorpay _razorpay;
 
   @override
   void initState() {
     super.initState();
 
-    razorpay = new Razorpay();
+    _razorpay = new Razorpay();
 
-    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlerPaymentSuccess);
-    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlerErrorFailure);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlerPaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlerErrorFailure);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    razorpay.clear();
+    _razorpay.clear();
   }
 
-  void openCheckout() {
+  void openCheckout(String name,String mail) {
     var options = {
       "key": "rzp_test_85KeJrsIww1tuP",
-      "amount": 2000 * 100,
+      "amount": 2000 *100,
       "currency": "INR",
       "name": "CET Pay",
       "description": "Payment for hostel fees",
       "prefill": {
-        "name": "Reuben",
+        "name": name,
         "contact": "918714829999",
-        "email": "reuben@cet.ac.in"
+        "email": mail
+      },
+      'external': {
+        'wallets': ['paytm']
       },
       "theme": {"hide_topbar": true, "color": "#000000"}
     };
 
     try {
-      razorpay.open(options);
+      _razorpay.open(options);
     } catch (e) {
       print(e.toString());
     }
   }
 
-  void handlerPaymentSuccess() {
-    print("Payment success");
-    Toast.show("Success", context);
+  void _handlerPaymentSuccess(PaymentSuccessResponse response) {
+    print("Payment success" + response.paymentId);
+    Toast.show("Payment success" + response.paymentId, context,duration: 3);
   }
 
-  void handlerErrorFailure() {
-    print("Payment error");
+  void _handlerErrorFailure(PaymentFailureResponse response) {
+    print("Payment error"+response.code.toString() + " - " + response.message);
+    Toast.show("Payment error"+response.code.toString() + " - " + response.message,context);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    print("External Wallet"+ response.walletName);
+    Toast.show("External Wallet"+ response.walletName,context);
   }
 
   @override
@@ -72,7 +83,7 @@ class _LandingHomeState extends State<LandingHome> {
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(
-                backgroundColor: Colors.green,
+                backgroundColor: Theme.of(context).primaryColor,
               ),
             );
           }
@@ -154,7 +165,7 @@ class _LandingHomeState extends State<LandingHome> {
                                     color: Theme.of(context).primaryColor),
                               ),
                               onPressed: () {
-                                openCheckout();
+                                openCheckout(snapshot.data.documents[0]['name'],snapshot.data.documents[0]['mailId']);
                               },
                             ),
                             const SizedBox(width: 8),
