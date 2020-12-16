@@ -17,13 +17,13 @@ class _LandingPaymentsState extends State<LandingPayments> {
         title: Center(
           child: Text(
             'Services',
-            style: TextStyle(color: Colors.green),
+            style: TextStyle(color: Colors.green,fontSize: 20),
           ),
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width* 0.05),
           child: Column(
             children: <Widget>[
               SizedBox(
@@ -44,21 +44,9 @@ class _LandingPaymentsState extends State<LandingPayments> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                      image: AssetImage('assets/images/hostel.jpg'),
+                      image: AssetImage('assets/images/hostel.png'),
                       fit: BoxFit.cover,
                     ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Hostel Fees',
-                        style: TextStyle(
-                            fontSize: 33,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )
-                    ],
                   ),
                 ),
               ),
@@ -68,52 +56,28 @@ class _LandingPaymentsState extends State<LandingPayments> {
               Row(
                 children: <Widget>[
                   Container(
-                    width: 165,
+                    width: MediaQuery.of(context).size.width* 0.425,
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/hostel.jpg'),
+                        image: AssetImage('assets/images/bus.png'),
                         fit: BoxFit.cover,
                       ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Bus Charges',
-                          style: TextStyle(
-                              fontSize: 21,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        )
-                      ],
                     ),
                   ),
                   SizedBox(
-                    width: 20,
+                    width: MediaQuery.of(context).size.width*0.05,
                   ),
                   Container(
-                    width: 165,
+                    width: MediaQuery.of(context).size.width* 0.425,
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/hostel.jpg'),
+                        image: AssetImage('assets/images/others.png'),
                         fit: BoxFit.cover,
                       ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Others',
-                          style: TextStyle(
-                              fontSize: 21,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        )
-                      ],
                     ),
                   )
                 ],
