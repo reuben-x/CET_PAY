@@ -11,10 +11,12 @@ class PaymentHistory extends StatefulWidget {
 class _PaymentHistoryState extends State<PaymentHistory> {
   
   Widget _buildListPanel(AsyncSnapshot<QuerySnapshot> snapshot) {
+
+    int listFreq = snapshot.data.docs.length;
     return ExpansionPanelList(
       expansionCallback: (int index,bool isExpanded) {
         setState(() {
-              isExpanded = !isExpanded;
+
         });
       },
       children: snapshot.data.docs.map((document) {
@@ -35,7 +37,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
               child: Text('PAY NOW',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
             ),
           ),
-          isExpanded: true,
+          isExpanded: false,
         );
       }).toList(),
     );
