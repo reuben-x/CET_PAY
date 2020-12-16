@@ -34,8 +34,8 @@ dependencies:
   toast: ^0.1.5
   shared_preferences: ^0.5.12+4
   settings_ui: ^0.4.0
-  folding_cell: ^1.0.0
   flushbar: ^1.10.4
+  expansion_card: ^0.1.0
 
 
 
