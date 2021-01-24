@@ -45,6 +45,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
             print(snapshot.data.docs);
             return ListView(
               children: snapshot.data.docs.map((document) {
+
                 return Center(
                   child: ExpansionCard(
                     title: Row(
@@ -52,7 +53,6 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                       children: <Widget>[
                         Column(
                           children: [
-                            Text("Nov 2020"),
                             SizedBox(
                               height: 7,
                             ),
@@ -87,10 +87,10 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                             margin: EdgeInsets.symmetric(
                               horizontal: 7,
                             ),
-                            child: OutlineButton(
+                            child: document['paid_status'] == false ? OutlineButton(
                               color: Theme.of(context).primaryColor,
                               onPressed: () {
-                                //Initiate Payment
+                                //eda ivde razorpay lekk direct cheythekkaavo ...
                                 print(document['date']);
                               },
                               child: Text(
@@ -99,7 +99,11 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
-                            ),
+                            ) : Text('Fees has already been paid.',
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 14,
+                            ),)
                           ),
                         ],
                       )

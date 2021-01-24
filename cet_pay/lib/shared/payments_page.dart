@@ -55,7 +55,7 @@ class _LandingPaymentsState extends State<LandingPayments> {
               ),
               Row(
                 children: <Widget>[
-                  Container(
+                  Ink(
                     width: MediaQuery.of(context).size.width* 0.425,
                     height: 150,
                     decoration: BoxDecoration(
@@ -69,7 +69,7 @@ class _LandingPaymentsState extends State<LandingPayments> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width*0.05,
                   ),
-                  Container(
+                  Ink(
                     width: MediaQuery.of(context).size.width* 0.425,
                     height: 150,
                     decoration: BoxDecoration(
