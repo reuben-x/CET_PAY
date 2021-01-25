@@ -158,9 +158,10 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                             child: document['paid_status'] == false ? OutlineButton(
                               color: Theme.of(context).primaryColor,
                               onPressed: () {
-                                //eda ivde razorpay lekk direct cheythekkaavo ...
-                                openCheckout(2000, 'name','mailId');
-                                print(document['date']);
+
+
+                                openCheckout(1000, 'Kevin M Thazhathoot', 'kevinmt@cet.ac.in');
+
                               },
                               child: Text(
                                 'PAY NOW',

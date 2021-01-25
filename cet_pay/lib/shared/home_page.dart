@@ -125,7 +125,7 @@ class _LandingHomeState extends State<LandingHome> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(15.0),
-                          child: Text('Hostel Fees - November 2020',
+                          child: Text('Hostel Fees - December 2020',
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold)),
                         ),
@@ -139,7 +139,7 @@ class _LandingHomeState extends State<LandingHome> {
                         Expanded(
                           child: Center(
                             child: Text(
-                              '\u{20B9} 2000',
+                              '\u{20B9} 1400',
                               style: TextStyle(
                                 color: Theme.of(context).accentColor,
                                 fontWeight: FontWeight.bold,
@@ -176,6 +176,72 @@ class _LandingHomeState extends State<LandingHome> {
                   ),
                 ),
                 Divider(),
+                Container(
+                  height: 165,
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Theme.of(context).primaryColor,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text('Hostel Fees - November 2020',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                        Divider(
+                          color: Colors.black,
+                          thickness: 1,
+                          height: 0,
+                          indent: 110,
+                          endIndent: 110,
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              '\u{20B9} 1120',
+                              style: TextStyle(
+                                color: Theme.of(context).accentColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            FlatButton(
+                              child: const Text('NOTIFY ME LATER'),
+                              onPressed: () {
+                                /* ... */
+                              },
+                            ),
+                            const SizedBox(width: 8),
+                            FlatButton(
+                              child: Text(
+                                'PAY NOW',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor),
+                              ),
+                              onPressed: () {
+                                openCheckout(2000, snapshot.data.documents[0]['name'],snapshot.data.documents[0]['mailId']);
+                              },
+                            ),
+                            const SizedBox(width: 8),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           );
