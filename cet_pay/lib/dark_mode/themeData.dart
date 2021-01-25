@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+      textTheme: TextTheme(
+          title: TextStyle(color: isDarkTheme ? Colors.white : Colors.black)),
       primarySwatch: Colors.green,
       primaryColor: Colors.green,
       backgroundColor: isDarkTheme ? Colors.white : Color(0xff212121),

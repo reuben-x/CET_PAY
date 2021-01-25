@@ -54,166 +54,170 @@ class _RegisterPageState extends State<RegisterPage> {
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'Field Required' : null,
-                        controller: _nameInput,
-                        decoration: InputDecoration(
-                          labelText: 'Name',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'Field Required' : null,
-                        controller: _mailInput,
-                        decoration: InputDecoration(
-                          labelText: 'CET Mail',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                      TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'Field Required' : null,
-                        controller: _admissionNumberInput,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Admission Number',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'Field Required' : null,
-                        controller: _rollNumberInput,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Roll Number',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                      TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'Field Required' : null,
-                        controller: _yearOfJoinInput,
-                        decoration: InputDecoration(
-                          labelText: 'Year Of Join',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                      TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'Field Required' : null,
-                        controller: _passwordInput,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 50.0),
-                      Container(
-                          height: 40.0,
-                          child: Material(
-                            borderRadius: BorderRadius.circular(20.0),
-                            shadowColor: Theme.of(context).accentColor,
-                            color: Theme.of(context).primaryColor,
-                            elevation: 7.0,
-                            child: GestureDetector(
-                              onTap: () async {
-                                setState(() {
-                                  isLoading = true;
-                                });
-                                //dynamic result =
-                                await _auth
-                                    .registerWithEmailAndPassword(
-                                        _mailInput.text,
-                                        _passwordInput.text,
-                                        _admissionNumberInput.text,
-                                        _rollNumberInput.text,
-                                        _nameInput.text,
-                                        _yearOfJoinInput.text)
-                                    .catchError((onError) {
-                                  Flushbar(
-                                    title: "Error!",
-                                    message: ErrorsRegister.show(onError.code),
-                                    duration: Duration(seconds: 5),
-                                    backgroundColor: Colors.red,
-                                    isDismissible: true,
-                                  )..show(context);
-                                });
-                                getMailId(_mailInput.text);
-                                setState(() {
-                                  isLoading = false;
-                                });
-                              },
-                              child: Center(
-                                child: Text(
-                                  'Register Now',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Montserrat'),
-                                ),
+                SingleChildScrollView(
+                  child: Container(
+                    padding:
+                        EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Field Required' : null,
+                          controller: _nameInput,
+                          decoration: InputDecoration(
+                            labelText: 'Name',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
                               ),
                             ),
-                          )),
-                    ],
+                          ),
+                        ),
+                        TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Field Required' : null,
+                          controller: _mailInput,
+                          decoration: InputDecoration(
+                            labelText: 'CET Mail',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Field Required' : null,
+                          controller: _admissionNumberInput,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Admission Number',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Field Required' : null,
+                          controller: _rollNumberInput,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Roll Number',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Field Required' : null,
+                          controller: _yearOfJoinInput,
+                          decoration: InputDecoration(
+                            labelText: 'Year Of Join',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          validator: (val) =>
+                              val.isEmpty ? 'Field Required' : null,
+                          controller: _passwordInput,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 50.0),
+                        Container(
+                            height: 40.0,
+                            child: Material(
+                              borderRadius: BorderRadius.circular(20.0),
+                              shadowColor: Theme.of(context).accentColor,
+                              color: Theme.of(context).primaryColor,
+                              elevation: 7.0,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+                                  //dynamic result =
+                                  await _auth
+                                      .registerWithEmailAndPassword(
+                                          _mailInput.text,
+                                          _passwordInput.text,
+                                          _admissionNumberInput.text,
+                                          _rollNumberInput.text,
+                                          _nameInput.text,
+                                          _yearOfJoinInput.text)
+                                      .catchError((onError) {
+                                    Flushbar(
+                                      title: "Error!",
+                                      message:
+                                          ErrorsRegister.show(onError.code),
+                                      duration: Duration(seconds: 5),
+                                      backgroundColor: Colors.red,
+                                      isDismissible: true,
+                                    )..show(context);
+                                  });
+                                  getMailId(_mailInput.text);
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                },
+                                child: Center(
+                                  child: Text(
+                                    'Register Now',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Montserrat'),
+                                  ),
+                                ),
+                              ),
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               ],

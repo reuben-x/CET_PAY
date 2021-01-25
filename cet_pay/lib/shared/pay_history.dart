@@ -25,7 +25,6 @@ class _PaymentHistoryState extends State<PaymentHistory> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlerPaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlerErrorFailure);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-
   }
 
   @override
@@ -35,18 +34,14 @@ class _PaymentHistoryState extends State<PaymentHistory> {
     _razorpay.clear();
   }
 
-  void openCheckout(int amount, String name,String mail) {
+  void openCheckout(int amount, String name, String mail) {
     var options = {
       "key": "rzp_test_85KeJrsIww1tuP",
-      "amount": amount *100,
+      "amount": amount * 100,
       "currency": "INR",
       "name": "CET Pay",
       "description": "Payment for hostel fees",
-      "prefill": {
-        "name": name,
-        "contact": "918714829999",
-        "email": mail
-      },
+      "prefill": {"name": name, "contact": "918714829999", "email": mail},
       'external': {
         'wallets': ['paytm']
       },
@@ -62,17 +57,20 @@ class _PaymentHistoryState extends State<PaymentHistory> {
 
   void _handlerPaymentSuccess(PaymentSuccessResponse response) {
     print("Payment success" + response.paymentId);
-    Toast.show("Payment success" + response.paymentId, context,duration: 3);
+    Toast.show("Payment success" + response.paymentId, context, duration: 3);
   }
 
   void _handlerErrorFailure(PaymentFailureResponse response) {
-    print("Payment error"+response.code.toString() + " - " + response.message);
-    Toast.show("Payment error"+response.code.toString() + " - " + response.message,context);
+    print(
+        "Payment error" + response.code.toString() + " - " + response.message);
+    Toast.show(
+        "Payment error" + response.code.toString() + " - " + response.message,
+        context);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    print("External Wallet"+ response.walletName);
-    Toast.show("External Wallet"+ response.walletName,context);
+    print("External Wallet" + response.walletName);
+    Toast.show("External Wallet" + response.walletName, context);
   }
 
   @override
@@ -86,9 +84,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Transaction History',
-          style: TextStyle(
-            color: Colors.black,
-          ),
+          style: TextStyle(fontSize: 22),
         ),
         centerTitle: true,
       ),
@@ -96,7 +92,8 @@ class _PaymentHistoryState extends State<PaymentHistory> {
           stream: FirebaseFirestore.instance
               .collection('users')
               .doc('mm6Z5bWY9RQlpgJSb0VPFcAmtal1')
-              .collection('fees').orderBy('date',descending: true)
+              .collection('fees')
+              .orderBy('date', descending: true)
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -110,12 +107,12 @@ class _PaymentHistoryState extends State<PaymentHistory> {
             return ListView(
               children: snapshot.data.docs.map((document) {
                 Timestamp timeInMillis = document["date"];
-                var date = DateTime.fromMillisecondsSinceEpoch(timeInMillis.millisecondsSinceEpoch);
+                var date = DateTime.fromMillisecondsSinceEpoch(
+                    timeInMillis.millisecondsSinceEpoch);
                 var formattedDate = DateFormat.yMMMd().format(date);
                 return Center(
                   child: ExpansionCard(
-                    title:
-                    Row(
+                    title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(formattedDate),
@@ -152,29 +149,32 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                             style: TextStyle(fontSize: 40),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                              horizontal: 7,
-                            ),
-                            child: document['paid_status'] == false ? OutlineButton(
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-
-
-                                openCheckout(1000, 'Kevin M Thazhathoot', 'kevinmt@cet.ac.in');
-
-                              },
-                              child: Text(
-                                'PAY NOW',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 7,
                               ),
-                            ) : Text('Fees has already been paid.',
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 14,
-                            ),)
-                          ),
+                              child: document['paid_status'] == false
+                                  ? OutlineButton(
+                                      color: Theme.of(context).primaryColor,
+                                      onPressed: () {
+                                        openCheckout(
+                                            1000,
+                                            'Kevin M Thazhathoot',
+                                            'kevinmt@cet.ac.in');
+                                      },
+                                      child: Text(
+                                        'PAY NOW',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
+                                    )
+                                  : Text(
+                                      'Fees has already been paid.',
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: 14,
+                                      ),
+                                    )),
                         ],
                       )
                     ],
