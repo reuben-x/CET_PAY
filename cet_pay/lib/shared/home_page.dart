@@ -32,10 +32,10 @@ class _LandingHomeState extends State<LandingHome> {
     _razorpay.clear();
   }
 
-  void openCheckout(String name,String mail) {
+  void openCheckout(int amount, String name,String mail) {
     var options = {
       "key": "rzp_test_85KeJrsIww1tuP",
-      "amount": 2000 *100,
+      "amount": amount *100,
       "currency": "INR",
       "name": "CET Pay",
       "description": "Payment for hostel fees",
@@ -165,7 +165,7 @@ class _LandingHomeState extends State<LandingHome> {
                                     color: Theme.of(context).primaryColor),
                               ),
                               onPressed: () {
-                                openCheckout(snapshot.data.documents[0]['name'],snapshot.data.documents[0]['mailId']);
+                                openCheckout(2000, snapshot.data.documents[0]['name'],snapshot.data.documents[0]['mailId']);
                               },
                             ),
                             const SizedBox(width: 8),
