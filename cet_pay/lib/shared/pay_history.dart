@@ -4,6 +4,7 @@ import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class PaymentHistory extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
           stream: FirebaseFirestore.instance
               .collection('users')
               .doc('mm6Z5bWY9RQlpgJSb0VPFcAmtal1')
-              .collection('fees')
+              .collection('fees').orderBy('date',descending: true)
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -45,12 +46,16 @@ class _PaymentHistoryState extends State<PaymentHistory> {
             print(snapshot.data.docs);
             return ListView(
               children: snapshot.data.docs.map((document) {
-
+                Timestamp timeInMillis = document["date"];
+                var date = DateTime.fromMillisecondsSinceEpoch(timeInMillis.millisecondsSinceEpoch);
+                var formattedDate = DateFormat.yMMMd().format(date);
                 return Center(
                   child: ExpansionCard(
-                    title: Row(
+                    title:
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
+                        Text(formattedDate),
                         Column(
                           children: [
                             SizedBox(
