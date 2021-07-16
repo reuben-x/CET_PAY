@@ -12,7 +12,7 @@ class Styles {
       backgroundColor: isDarkTheme ? Colors.white : Color(0xff212121),
       textSelectionColor: isDarkTheme ? Colors.white : Colors.black,
       cardColor: isDarkTheme ? Color(0xff212121) : Colors.white,
-      canvasColor: isDarkTheme ? Color(0xff212121) : Colors.grey[50],
+      canvasColor: isDarkTheme ? Color(0xCC1A1A) : Colors.grey[50],
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       bottomNavigationBarTheme:
           Theme.of(context).bottomNavigationBarTheme.copyWith(
