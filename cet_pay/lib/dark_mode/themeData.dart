@@ -17,10 +17,10 @@ class Styles {
       bottomNavigationBarTheme:
           Theme.of(context).bottomNavigationBarTheme.copyWith(
                 unselectedIconTheme: IconThemeData(
-                  color: isDarkTheme ? Colors.white : Colors.grey,
+                  color: isDarkTheme ? Colors.white : Colors.black,
                 ),
                 unselectedLabelStyle: TextStyle(
-                  color: isDarkTheme ? Colors.white : Colors.black,
+                  color: isDarkTheme ? Colors.white : Colors.grey,
                 ),
                 unselectedItemColor: isDarkTheme ? Colors.white : Colors.black,
               ),
