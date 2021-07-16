@@ -10,7 +10,7 @@ class Styles {
       primarySwatch: Colors.green,
       primaryColor: Colors.green,
       backgroundColor: isDarkTheme ? Colors.white : Color(0xff212121),
-      textSelectionColor: isDarkTheme ? Colors.light : Colors.black,
+      textSelectionColor: isDarkTheme ? Colors.white : Colors.black,
       cardColor: isDarkTheme ? Color(0xff212121) : Colors.white,
       canvasColor: isDarkTheme ? Color(0xff212121) : Colors.grey[50],
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
